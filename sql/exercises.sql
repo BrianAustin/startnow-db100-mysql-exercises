@@ -212,8 +212,6 @@ FROM customer
 LEFT JOIN
 actor ON customer.last_name = actor.last_name;
 
-
-
 # 9b. Select the customer first_name/last_name and actor first_name/last_name columns from performing a right join between the customer and actor column on the last_name column in each table. (i.e. `customer.last_name = actor.last_name`)
 SELECT 
     customer.first_name as customer_first_name,
@@ -236,12 +234,31 @@ actor ON customer.last_name = actor.last_name;
 
 # 9d. Select the city name and country name columns from the city table, performing a left join with the country table to get the country name column.
 SELECT 
-    city.city,city.country_id,
-    
+    city.city,
+    country.country
+FROM city
+LEFT JOIN 
+country ON city.country_id = country.country_id;
 
 # 9e. Select the title, description, release year, and language name columns from the film table, performing a left join with the language table to get the 'language' column.
 # Label the language.name column as 'language' (e.g. `select language.name as language`)
+SELECT
+    film.title,
+    film.description,
+    film.release_year,
+    language.name as language
+FROM film
+LEFT JOIN
+language ON film.language_id = language.language_id;
 
-
-# 9f. Select the first_name, last_name, address, address2, city name, district, and postal code columns from the staff table, performing 2 left joins with the address table then the city table to get the address and city related columns.
-
+# 9f. Select the first_name, last_name, address, address2, city name, district, and postal code columns 
+# from the staff table, performing 2 left joins with the address table 
+# then the city table to get the address and city related columns.
+SELECT
+    staff.first_name,staff.last_name,
+    address.address,address.address2,address.district,city.city,address.postal_code
+FROM staff
+LEFT JOIN 
+address ON staff.address_id = address.address_id
+LEFT JOIN
+city ON address.city_id = city.city_id;
